@@ -89,7 +89,7 @@ td {
 }
 
 .logo-img {
-    max-height: 50px;
+    max-height: 30px;
     max-width: 100%;
     object-fit: contain;
 }
@@ -138,7 +138,7 @@ function getStatusClass(value) {
 
     if (value.includes("CONFIRMED") && !value.includes("NOT")) return "confirmed";
     if (value.includes("CANCELLED")) return "cancelled";
-    if (value.includes("NOT")) return "pending";
+    if (value.includes("PENDING")) return "pending";
     return "";
 }
 
