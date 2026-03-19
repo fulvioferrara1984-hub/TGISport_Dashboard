@@ -2,54 +2,76 @@
 <html lang="it">
 <head>
 <meta charset="UTF-8">
-<title>Tabellone Eventi Vintage</title>
+<title>Tabellone Eventi</title>
 
-<!-- Libreria CSV -->
 <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
+<!-- FONT -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
 :root {
-    --bg-color: #050505;
-    --flap-bg: #1a1a1a;
-    --text-color: #f0f0f0;
+    --bg: #050505;
+    --cell: #1a1a1a;
+    --text: #f0f0f0;
     --accent: #ff9d00;
 }
 
 body {
-    margin: 0;
-    width: 1920px;
-    height: 1080px;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    font-family: 'Courier New', monospace;
+    margin:0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Montserrat', sans-serif;
 }
 
 header {
-    background: #000;
-    padding: 25px;
-    text-align: center;
-    font-size: 45px;
-    letter-spacing: 10px;
-    color: var(--accent);
-    border-bottom: 6px solid #111;
+    text-align:center;
+    font-size:50px;
+    padding:20px;
+    color:var(--accent);
 }
 
 table {
-    width: 100%;
-    border-spacing: 8px;
+    width:100%;
+    border-collapse:separate;
+    border-spacing:6px;
+    table-layout:fixed; /* 🔥 colonne fisse */
 }
 
-td {
-    background: var(--flap-bg);
-    height: 90px;
-    font-size: 24px;
-    padding: 10px;
-    border-radius: 6px;
-    text-transform: uppercase;
+th {
+    font-size:20px;
+    color:#888;
 }
 
-.rotating {
-    color: var(--accent);
+td, th {
+    background:var(--cell);
+    padding:10px;
+    height:70px;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+    text-align:center;
+    border-radius:6px;
+}
+
+/* larghezza fissa colonne */
+td, th {
+    width:10%;
+}
+
+/* colori stato */
+.confirmed { color: #00ff88; }
+.cancelled { color: #ff3b3b; }
+.pending { color: #ffd000; }
+
+/* effetto flip */
+.flip {
+    animation: flip 0.6s ease;
+}
+
+@keyframes flip {
+    0% { transform: rotateX(90deg); opacity:0; }
+    100% { transform: rotateX(0); opacity:1; }
 }
 </style>
 </head>
@@ -59,41 +81,56 @@ td {
 <header>TABELLONE EVENTI UFFICIO</header>
 
 <table>
-    <tbody id="board-body"></tbody>
+<tbody id="board-body"></tbody>
 </table>
 
 <script>
 let allData = [];
 let headers = [];
+
 let extraIndex = 0;
+let pageIndex = 0;
+
+const ROWS_PER_PAGE = 10;
 
 function loadData() {
     Papa.parse("./eventi.csv", {
         download: true,
         skipEmptyLines: true,
         complete: function(results) {
-            headers = results.data[0]; // intestazioni
+            headers = results.data[0];
             allData = results.data.slice(1);
             render();
         }
     });
 }
 
+function getStatusClass(value) {
+    if (!value) return "";
+    value = value.toUpperCase();
+
+    if (value.includes("CONFIRMED") && !value.includes("NOT")) return "confirmed";
+    if (value.includes("CANCELLED")) return "cancelled";
+    if (value.includes("NOT")) return "pending";
+    return "";
+}
+
 function render() {
     const tbody = document.getElementById("board-body");
     tbody.innerHTML = "";
 
-    // 🔹 HEADER
+    const start = pageIndex * ROWS_PER_PAGE;
+    const pageData = allData.slice(start, start + ROWS_PER_PAGE);
+
+    // HEADER
     const headerRow = document.createElement("tr");
 
-    // Colonne fisse 1-6
     for (let i = 0; i < 6; i++) {
         const th = document.createElement("th");
         th.textContent = headers[i] || "";
         headerRow.appendChild(th);
     }
 
-    // Colonne dinamiche (3)
     for (let i = 0; i < 3; i++) {
         const th = document.createElement("th");
         th.textContent = headers[6 + extraIndex + i] || "";
@@ -101,48 +138,56 @@ function render() {
         headerRow.appendChild(th);
     }
 
-    // Colonna fissa 16
     const thLast = document.createElement("th");
     thLast.textContent = headers[15] || "";
     headerRow.appendChild(thLast);
 
     tbody.appendChild(headerRow);
 
-    // 🔹 DATI
-    allData.slice(0, 7).forEach(row => {
+    // DATI
+    pageData.forEach(row => {
         const tr = document.createElement("tr");
 
-        // Fisse 1-6
         for (let i = 0; i < 6; i++) {
             const td = document.createElement("td");
             td.textContent = row[i] || "";
+            td.classList.add("flip");
             tr.appendChild(td);
         }
 
-        // Dinamiche (3 colonne)
         for (let i = 0; i < 3; i++) {
             const td = document.createElement("td");
-            td.className = "rotating";
             td.textContent = row[6 + extraIndex + i] || "";
+            td.classList.add("flip");
             tr.appendChild(td);
         }
 
-        // Fissa 16
         const tdLast = document.createElement("td");
         tdLast.textContent = row[15] || "";
+        tdLast.classList.add(getStatusClass(row[15]));
+        tdLast.classList.add("flip");
         tr.appendChild(tdLast);
 
         tbody.appendChild(tr);
     });
 }
 
-// Rotazione ogni 6 secondi
+// rotazione colonne
 setInterval(() => {
-    extraIndex = (extraIndex + 3) % 9; // 9 colonne dinamiche (7→15)
+    extraIndex = (extraIndex + 3) % 9;
     render();
 }, 6000);
 
-// Reload CSV ogni minuto
+// paginazione righe
+setInterval(() => {
+    pageIndex++;
+    if (pageIndex * ROWS_PER_PAGE >= allData.length) {
+        pageIndex = 0;
+    }
+    render();
+}, 8000);
+
+// reload CSV
 setInterval(loadData, 60000);
 
 loadData();
