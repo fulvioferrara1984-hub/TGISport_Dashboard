@@ -163,7 +163,7 @@ function render(isPageChange = false) {
     }
 
     // colonne 4-6 normali
-    for (let i = 3; i < 6; i++) {
+    for (let i = 3; i < 7; i++) {
     const th = document.createElement("th");
     th.textContent = headers[i] || "";
     th.classList.add("col-normal");
@@ -172,13 +172,13 @@ function render(isPageChange = false) {
 
     for (let i = 0; i < 3; i++) {
         const th = document.createElement("th");
-        th.textContent = headers[6 + extraIndex + i] || "";
+        th.textContent = headers[7 + extraIndex + i] || "";
         //th.style.color = "var(--accent)";
         headerRow.appendChild(th);
     }
 
     const thLast = document.createElement("th");
-    thLast.textContent = headers[15] || "";
+    thLast.textContent = headers[16] || "";
     headerRow.appendChild(thLast);
 
     tbody.appendChild(headerRow);
@@ -196,7 +196,7 @@ function render(isPageChange = false) {
         tdLogo.classList.add("col-logo");
 
         const img = document.createElement("img");
-        img.src = "Loghi/" + (row[16] || "default.png"); // colonna logo
+        img.src = "Loghi/" + (row[17] || "default.png"); // colonna logo
         img.classList.add("logo-img");
 
         tdLogo.appendChild(img);
@@ -212,7 +212,7 @@ function render(isPageChange = false) {
         }
 
         // colonne 4-6 normali
-        for (let i = 3; i < 6; i++) {
+        for (let i = 3; i < 7; i++) {
         const td = document.createElement("td");
         td.textContent = row[i] || "";
         td.classList.add("col-normal");
@@ -222,7 +222,7 @@ function render(isPageChange = false) {
         // colonne dinamiche
         for (let i = 0; i < 3; i++) {
             const td = document.createElement("td");
-            td.textContent = row[6 + extraIndex + i] || "";
+            td.textContent = row[7 + extraIndex + i] || "";
 
             // flip SOLO se cambiano colonne
             if (extraIndex !== lastExtraIndex) {
@@ -234,8 +234,8 @@ function render(isPageChange = false) {
 
         // ultima colonna
         const tdLast = document.createElement("td");
-        tdLast.textContent = row[15] || "";
-        tdLast.classList.add(getStatusClass(row[15]));
+        tdLast.textContent = row[16] || "";
+        tdLast.classList.add(getStatusClass(row[16]));
         tr.appendChild(tdLast);
 
         tbody.appendChild(tr);
