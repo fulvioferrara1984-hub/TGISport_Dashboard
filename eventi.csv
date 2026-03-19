@@ -1,4 +1,4 @@
-DATE,TIME (CET),Sport,Competition,Team A,Team B,Location,Video format,Operator,Tracking type,Virtual feed,Supervisor,Carrier IN,Carrier OUT,PM,Status
+DATE,TIME (CET),SPORT,Competition,Team A,Team B,Location,Video format,Operator,Tracking type,Virtual feed,Supervisor,Carrier IN,Carrier OUT,PM,Status
 26/03/26,20:45,Football,WCQ - Europe,Polonia,Albania,MCR2,1080i50, Fill in ,PGMOnly,1, Fill in , Fiber - ESSA , SAT - EIT , Fulvio Ferrara ,Confirmed
 26/03/26,20:45,Football,WCQ - Europe,Italy,Northern Ireland,MCR2,1080i50, Fill in ,Tracking1,1, Fill in , Fiber - EIT , Fiber - EIT , Fulvio Ferrara ,Confirmed
 28/03/26,19:00,Football,Friendly,Scotland,Japan,MCR2,1080i50, Fill in ,PGMOnly,1, Fill in , Fiber - ESSA , Fiber - ESSA , Fulvio Ferrara ,Confirmed
