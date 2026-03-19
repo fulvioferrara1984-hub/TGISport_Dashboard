@@ -1,128 +1,131 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <title>Tabellone Eventi Vintage</title>
-    <script src="https://cdnjs.cloudflare.com"></script>
-    <style>
-        :root {
-            --bg-color: #050505;
-            --flap-bg: #1a1a1a;
-            --text-color: #f0f0f0;
-            --accent: #ff9d00;
-        }
-        body {
-            margin: 0; padding: 0;
-            width: 1920px; height: 1080px;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: 'Courier New', Courier, monospace;
-            overflow: hidden;
-            display: flex; flex-direction: column;
-        }
-        header { 
-            background: #000; padding: 25px; text-align: center; 
-            font-size: 45px; letter-spacing: 12px; color: var(--accent);
-            border-bottom: 8px solid #111; font-weight: bold;
-        }
-        table { width: 100%; border-collapse: separate; border-spacing: 8px; table-layout: fixed; }
-        th { font-size: 18px; padding: 10px; color: #555; text-transform: uppercase; text-align: left; }
-        td { 
-            background: var(--flap-bg);
-            height: 110px; font-size: 26px; font-weight: bold;
-            padding: 15px; border-radius: 6px;
-            border-bottom: 5px solid #000;
-            position: relative;
-            box-shadow: inset 0 10px 30px rgba(0,0,0,0.8);
-            text-transform: uppercase;
-            overflow: hidden; white-space: nowrap;
-        }
-        /* Linea centrale split-flap */
-        td::after {
-            content: ""; position: absolute; top: 50%; left: 0;
-            width: 100%; height: 3px; background: rgba(0,0,0,0.7);
-        }
-        .rotating { color: var(--accent); animation: flip 0.6s ease; }
-        @keyframes flip {
-            0% { transform: rotateX(90deg); opacity: 0; }
-            100% { transform: rotateX(0deg); opacity: 1; }
-        }
-    </style>
+<meta charset="UTF-8">
+<title>Tabellone Eventi Vintage</title>
+
+<!-- Libreria CSV -->
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
+<style>
+:root {
+    --bg-color: #050505;
+    --flap-bg: #1a1a1a;
+    --text-color: #f0f0f0;
+    --accent: #ff9d00;
+}
+
+body {
+    margin: 0;
+    width: 1920px;
+    height: 1080px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Courier New', monospace;
+}
+
+header {
+    background: #000;
+    padding: 25px;
+    text-align: center;
+    font-size: 45px;
+    letter-spacing: 10px;
+    color: var(--accent);
+    border-bottom: 6px solid #111;
+}
+
+table {
+    width: 100%;
+    border-spacing: 8px;
+}
+
+td {
+    background: var(--flap-bg);
+    height: 90px;
+    font-size: 24px;
+    padding: 10px;
+    border-radius: 6px;
+    text-transform: uppercase;
+}
+
+.rotating {
+    color: var(--accent);
+}
+</style>
 </head>
+
 <body>
-<header>TABELLONE PARTENZE EVENTI UFFICIO</header>
+
+<header>TABELLONE EVENTI UFFICIO</header>
+
 <table>
-    <thead>
-        <tr>
-            <th>Fisso 1</th><th>Fisso 2</th><th>Fisso 3</th><th>Fisso 4</th><th>Fisso 5</th><th>Fisso 6</th><th>Fisso 7</th>
-            <th id="h-rot1" style="color:var(--accent)">Dinamico A</th>
-            <th id="h-rot2" style="color:var(--accent)">Dinamico B</th>
-        </tr>
-    </thead>
     <tbody id="board-body"></tbody>
 </table>
 
 <script>
-    let allData = [];
-    let extraIndex = 0;
+let allData = [];
+let extraIndex = 0;
 
-        async function loadData() {
-    // Usiamo './' per dire "cerca esattamente in questa cartella"
-    const fileUrl = "./eventi.csv?v=" + new Date().getTime();
-    
-    Papa.parse(fileUrl, {
+function loadData() {
+    console.log("Carico CSV...");
+
+    Papa.parse("eventi.csv", {
         download: true,
-        header: false,
         skipEmptyLines: true,
         complete: function(results) {
-            console.log("Dati ricevuti:", results.data);
-            // Filtriamo righe che potrebbero essere vuote o con soli spazi
-            allData = results.data.filter(row => row.length > 1 && row[0] !== "");
+            console.log("CSV caricato:", results.data);
+            allData = results.data.slice(1);
             render();
         },
         error: function(err) {
-            console.error("Errore critico PapaParse:", err);
+            console.error("Errore CSV:", err);
         }
     });
 }
 
+function render() {
+    const tbody = document.getElementById("board-body");
+    tbody.innerHTML = "";
 
-
-    function render() {
-        const tbody = document.getElementById('board-body');
-        tbody.innerHTML = '';
-        
-        // Mostra solo i primi 7 eventi validi
-        allData.slice(0, 7).forEach(row => {
-            const tr = document.createElement('tr');
-            
-            // 7 Colonne Fisse (indici CSV 0-6)
-            for(let i=0; i<7; i++) {
-                const td = document.createElement('td');
-                td.textContent = row[i] || "";
-                tr.appendChild(td);
-            }
-
-            // 2 Colonne a Rotazione (indici CSV 7-16)
-            for(let i=0; i<2; i++) {
-                const td = document.createElement('td');
-                td.className = 'rotating';
-                td.textContent = row[7 + extraIndex + i] || "";
-                tr.appendChild(td);
-            }
-            tbody.appendChild(tr);
-        });
+    if (allData.length === 0) {
+        tbody.innerHTML = "<tr><td>Nessun dato trovato</td></tr>";
+        return;
     }
 
-    // Cambia le colonne extra ogni 7 secondi
-    setInterval(() => {
-        extraIndex = (extraIndex + 2) % 10;
-        render();
-    }, 7000);
+    allData.slice(0, 7).forEach(row => {
+        const tr = document.createElement("tr");
 
-    // Ricarica il file CSV ogni 60 secondi
-    setInterval(loadData, 60000);
-    loadData();
+        // 7 colonne fisse
+        for (let i = 0; i < 7; i++) {
+            const td = document.createElement("td");
+            td.textContent = row[i] || "";
+            tr.appendChild(td);
+        }
+
+        // 2 colonne dinamiche
+        for (let i = 0; i < 2; i++) {
+            const td = document.createElement("td");
+            td.className = "rotating";
+            td.textContent = row[7 + extraIndex + i] || "";
+            tr.appendChild(td);
+        }
+
+        tbody.appendChild(tr);
+    });
+}
+
+// Rotazione colonne
+setInterval(() => {
+    extraIndex = (extraIndex + 2) % 10;
+    render();
+}, 7000);
+
+// Reload CSV
+setInterval(loadData, 60000);
+
+// Start
+loadData();
 </script>
+
 </body>
 </html>
