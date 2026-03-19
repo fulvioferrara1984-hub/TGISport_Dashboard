@@ -102,12 +102,30 @@ td {
 
 <body>
 
-<header style="background-color: rgb(53, 171, 249); display: flex; align-items: center; justify-content: space-between;padding: 10px 20px; color: black;">
+<!-- <header style="background-color: rgb(53, 171, 249); display: flex; align-items: center; justify-content: space-between;padding: 10px 20px; color: black;">
 <h1 style="margin: 0; font-size: 1.0em;">LIVE3 VIRTUAL DASHBOARD</h1>
-  <!-- Il logo a destra -->
+  <!-- Il logo a destra
 <img src="TGILogo.png" alt="Logo" style="height: 1.0em; width: auto;">
+</header>-->
+<header style="background-color: rgb(53, 171, 249); display: flex; align-items: center; justify-content: space-between; padding: 10px 20px; color: black;">
+  <h1 style="margin: 0; font-size: 1.0em;">LIVE5 VIRTUAL DASHBOARD</h1>
+
+  <!-- Contenitore per l'effetto alternanza -->
+  <div style="position: relative; height: 1.0em; display: flex; align-items: center; justify-content: flex-end;">
+    
+    <!-- Logo -->
+    <img id="headerLogo" src="TGILogo.png" alt="Logo" 
+         style="height: 1.0em; width: auto; transition: opacity 1s ease-in-out; position: absolute; opacity: 1;">
+    
+    <!-- Data e Ora (inizialmente invisibile) -->
+    <span id="headerDateTime" 
+          style="font-size: 1.0em; white-space: nowrap; transition: opacity 1s ease-in-out; position: absolute; opacity: 0;">
+    </span>
+    
+  </div>
 </header>
 
+    
 <table>
 <tbody id="board-body"></tbody>
 </table>
@@ -123,7 +141,48 @@ let lastExtraIndex = 0;
 
 const ROWS_PER_PAGE = 10;
 
-function loadData() {
+    //alternanza logo e orario
+    const logo = document.getElementById('headerLogo');
+    const dateTimeDisplay = document.getElementById('headerDateTime');
+    let showingLogo = true;
+
+    function updateDateTime() {
+        const ora = new Date();
+        const giorno = String(ora.getDate()).padStart(2, '0');
+        const mese = String(ora.getMonth() + 1).padStart(2, '0');
+        const anno = ora.getFullYear();
+        const ore = String(ora.getHours()).padStart(2, '0');
+        const minuti = String(ora.getMinutes()).padStart(2, '0');
+        const secondi = String(ora.getSeconds()).padStart(2, '0');
+        dateTimeDisplay.innerText = `${giorno}/${mese}/${anno} - ${ore}:${minuti}:${secondi}`;
+    }
+
+      function toggleHeaderElement() {
+        if (showingLogo) {
+      // Scompare logo, appare data
+      updateDateTime(); // Aggiorna prima di mostrare
+      logo.style.opacity = "0";
+      dateTimeDisplay.style.opacity = "1";
+    } else {
+      // Scompare data, appare logo
+      logo.style.opacity = "1";
+      dateTimeDisplay.style.opacity = "0";
+    }
+    showingLogo = !showingLogo;
+  }
+//fine
+
+// Aggiorna l'ora ogni secondo (per precisione quando visibile)
+    setInterval(updateDateTime, 1000);
+
+    // Alterna ogni 30 secondi
+    setInterval(toggleHeaderElement, 30000);
+
+    // Esegui subito l'aggiornamento dell'ora
+    updateDateTime();
+//fine
+
+    function loadData() {
     Papa.parse("./eventi.csv", {
         download: true,
         skipEmptyLines: true,
