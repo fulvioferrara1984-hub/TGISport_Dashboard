@@ -1,5 +1,5 @@
-DATE,TIME (CET),SPORT,COMPETITION,Team A,Team B,Location,Video format,Operator,Tracking type,Virtual feed,Supervisor,Carrier IN,Carrier OUT,PM,Status,Logo
-26/03/26,20:45,Football,WCQ - Europe,Polonia,Albania,MCR2,1080i50, Fill in ,PGMOnly,1, Fill in , Fiber - ESSA , SAT - EIT , Fulvio Ferrara ,Confirmed,POL-ALB_V2.png
+DATE,TIME (CET),SPORT,COMPETITION,TEAM A,Team B,Location,Video format,Operator,Tracking type,Virtual feed,Supervisor,Carrier IN,Carrier OUT,PM,Status,Logo
+26/03/26,20:45,Football,WCQ - Europe,Polonia,Albania,MCR2,1080i50, Fill in ,PGMOnly,1, Fill in , Fiber - ESSA , SAT - EIT , Fulvio Ferrara ,Confirmed,./Logo/POL-ALB_V2.png
 26/03/26,20:45,Football,WCQ - Europe,Italy,Northern Ireland,MCR2,1080i50, Fill in ,Tracking1,1, Fill in , Fiber - EIT , Fiber - EIT , Fulvio Ferrara ,Confirmed,POL-ALB_V2.png
 28/03/26,19:00,Football,Friendly,Scotland,Japan,MCR2,1080i50, Fill in ,PGMOnly,1, Fill in , Fiber - ESSA , Fiber - ESSA , Fulvio Ferrara ,Confirmed,POL-ALB_V2.png
 28/03/26,20:30,Football,Friendly,USA,Belgium,MCR2,1080i60, Fill in ,PGMOnly,1, Fill in , Fiber - ESSA , Fiber - ESSA , Fulvio Ferrara ,Cancelled,POL-ALB_V2.png
