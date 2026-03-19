@@ -60,10 +60,10 @@ td, th {
     border-radius:6px;
 }
 
-/* larghezza fissa colonne */
-td, th {
-    width:10%;
-}
+/* larghezze specifiche */
+.col-small { width:6%; }
+.col-logo { width:8%; }
+.col-normal { width:auto; }
 
 /* colori stato */
 .confirmed { color: #00ff88; }
@@ -84,6 +84,13 @@ td, th {
     0% { transform: rotateX(90deg); opacity:0; }
     100% { transform: rotateX(0); opacity:1; }
 }
+
+.logo-img {
+    max-height: 50px;
+    max-width: 100%;
+    object-fit: contain;
+}
+    
 </style>
 </head>
 
@@ -142,10 +149,25 @@ function render(isPageChange = false) {
     // HEADER
     const headerRow = document.createElement("tr");
 
-    for (let i = 0; i < 6; i++) {
-        const th = document.createElement("th");
-        th.textContent = headers[i] || "";
-        headerRow.appendChild(th);
+    const thLogo = document.createElement("th");
+    thLogo.textContent = "";
+    thLogo.classList.add("col-logo");
+    headerRow.appendChild(thLogo);
+    
+    // prime 3 colonne strette
+    for (let i = 0; i < 3; i++) {
+    const th = document.createElement("th");
+    th.textContent = headers[i] || "";
+    th.classList.add("col-small");
+    headerRow.appendChild(th);
+    }
+
+    // colonne 4-6 normali
+    for (let i = 3; i < 6; i++) {
+    const th = document.createElement("th");
+    th.textContent = headers[i] || "";
+    th.classList.add("col-normal");
+    headerRow.appendChild(th);
     }
 
     for (let i = 0; i < 3; i++) {
@@ -170,11 +192,31 @@ function render(isPageChange = false) {
             tr.classList.add("flip-row");
         }
 
+        const tdLogo = document.createElement("td");
+        tdLogo.classList.add("col-logo");
+
+        const img = document.createElement("img");
+        img.src = "loghi/" + (row[16] || "default.png"); // colonna logo
+        img.classList.add("logo-img");
+
+        tdLogo.appendChild(img);
+        tr.appendChild(tdLogo);
+        
         // colonne fisse
-        for (let i = 0; i < 6; i++) {
-            const td = document.createElement("td");
-            td.textContent = row[i] || "";
-            tr.appendChild(td);
+        // prime 3 colonne strette
+        for (let i = 0; i < 3; i++) {
+        const td = document.createElement("td");
+        td.textContent = row[i] || "";
+        td.classList.add("col-small");
+        tr.appendChild(td);
+        }
+
+        // colonne 4-6 normali
+        for (let i = 3; i < 6; i++) {
+        const td = document.createElement("td");
+        td.textContent = row[i] || "";
+        td.classList.add("col-normal");
+        tr.appendChild(td);
         }
 
         // colonne dinamiche
