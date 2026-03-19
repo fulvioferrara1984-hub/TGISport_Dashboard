@@ -108,7 +108,7 @@ td {
 <img src="TGILogo.png" alt="Logo" style="height: 1.0em; width: auto;">
 </header>-->
 <header style="background-color: rgb(53, 171, 249); display: flex; align-items: center; justify-content: space-between; padding: 10px 20px; color: black;">
-  <h1 style="margin: 0; font-size: 1.0em;">LIVE3 VIRTUAL DASHBOARD</h1>
+  <h1 style="margin: 0; font-size: 1.0em;">LIVE4 VIRTUAL DASHBOARD</h1>
 
   <!-- Contenitore per l'effetto alternanza -->
   <div style="position: relative; height: 1.0em; display: flex; align-items: center; justify-content: flex-end;">
@@ -247,29 +247,15 @@ function render(isPageChange = false) {
     headerRow.appendChild(th);
     }
 
-    //// 3 colonne dinamiche
-    //for (let i = 0; i < 3; i++) {
-    //    const th = document.createElement("th");
-    //    th.textContent = headers[7 + extraIndex + i] || "";
-    //    //th.style.color = "var(--accent)";
-    //     if (i==2) {
-    //    th.classList.add("col-mediumlarge");
-    //    }
-    //    headerRow.appendChild(th);
-    //}
-
-    // Creiamo un contenitore (array) per le 3 testate dinamiche che aggiungeremo dopo
-    const dynamicThs = [];
-
+    // 3 colonne dinamiche
     for (let i = 0; i < 3; i++) {
         const th = document.createElement("th");
-        // Lasciamo il testo vuoto inizialmente o mettiamo un placeholder
-        th.textContent = ""; 
-        if (i == 2) {
-            th.classList.add("col-mediumlarge");
+        th.textContent = headers[7 + extraIndex + i] || "";
+        //th.style.color = "var(--accent)";
+         if (i==2) {
+        th.classList.add("col-mediumlarge");
         }
         headerRow.appendChild(th);
-        dynamicThs.push(th); // Salviamo il riferimento al TH
     }
 
     // Aggiungi l'ultima colonna fissa (se presente nel tuo codice originale)
@@ -280,17 +266,6 @@ function render(isPageChange = false) {
     headerRow.appendChild(thLast);
 
     tbody.appendChild(headerRow);
-
-    // --- AGGIUNTA RITARDATA DEI TITOLI DINAMICI ---
-    setTimeout(() => {
-        dynamicThs.forEach((th, i) => {
-            th.textContent = headers[7 + extraIndex + i] || "";
-            // Qui puoi aggiungere un'animazione CSS se vuoi un effetto comparsa
-            th.style.opacity = "0";
-            th.style.transition = "opacity 0.5s";
-            setTimeout(() => th.style.opacity = "1", 500);
-        });
-    }, 1500); // 500ms = 0.5 secondi
 
     // DATI
     pageData.forEach(row => {
