@@ -1,4 +1,4 @@
-DATE,TIME (CET),SPORT,COMPETITION,ROUND,TEAM A,TEAM B,LOCATION,VIDEO FORMAT,OPERATOR,TRACKING TYPE,VIRT. OUTPUTS,SUPERVISOR,CARRIER IN,CARRIER OUT,PM,STATUS,LOGO
+DATE,TIME,SPORT,COMPETITION,ROUND,TEAM A,TEAM B,LOCATION,VIDEO FORMAT,OPERATOR,TRACKING,OUTPUTS,SUPERVISOR,CARRIER IN,CARRIER OUT,PM,STATUS,LOGO
 26/03/26,20:45,Football,WCQ - Europe,SF,Italy,North. Ireland,MCR2,1080i50,M.Molinari,Tracking1,1,S.Pedatella, Fiber - EIT , Fiber - EIT ,F.Ferrara,Confirmed,Uefa.png
 26/03/26,20:45,Football,WCQ - Europe,SF,Poland,Albania,MCR2,1080i50,A.Colzani,PGMOnly,1,S.Pedatella, Fiber - Eurovision, SAT - EIT ,F.Ferrara,Confirmed,Uefa.png
 28/03/26,19:00,Football,Friendly,H2H,Scotland,Japan,MCR2,1080i50,E.Colognese,PGMOnly,1,F.Ferrara, Fiber - Eurovision, Fiber - Eurovision,F.Ferrara,Confirmed,Uefa.png
