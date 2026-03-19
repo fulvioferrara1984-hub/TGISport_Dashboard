@@ -64,27 +64,17 @@ td {
 
 <script>
 let allData = [];
+let headers = [];
 let extraIndex = 0;
 
 function loadData() {
-    console.log("Carico CSV...");
-
-fetch("eventi.csv")
-  .then(res => res.text())
-  .then(text => {
-      console.log("CONTENUTO FILE:", text);
-  });
-    
     Papa.parse("./eventi.csv", {
         download: true,
         skipEmptyLines: true,
         complete: function(results) {
-            console.log("CSV caricato:", results.data);
+            headers = results.data[0]; // intestazioni
             allData = results.data.slice(1);
             render();
-        },
-        error: function(err) {
-            console.error("Errore CSV:", err);
         }
     });
 }
@@ -93,43 +83,68 @@ function render() {
     const tbody = document.getElementById("board-body");
     tbody.innerHTML = "";
 
-    if (allData.length === 0) {
-        tbody.innerHTML = "<tr><td>Nessun dato trovato</td></tr>";
-        return;
+    // 🔹 HEADER
+    const headerRow = document.createElement("tr");
+
+    // Colonne fisse 1-6
+    for (let i = 0; i < 6; i++) {
+        const th = document.createElement("th");
+        th.textContent = headers[i] || "";
+        headerRow.appendChild(th);
     }
 
+    // Colonne dinamiche (3)
+    for (let i = 0; i < 3; i++) {
+        const th = document.createElement("th");
+        th.textContent = headers[6 + extraIndex + i] || "";
+        th.style.color = "var(--accent)";
+        headerRow.appendChild(th);
+    }
+
+    // Colonna fissa 16
+    const thLast = document.createElement("th");
+    thLast.textContent = headers[15] || "";
+    headerRow.appendChild(thLast);
+
+    tbody.appendChild(headerRow);
+
+    // 🔹 DATI
     allData.slice(0, 7).forEach(row => {
         const tr = document.createElement("tr");
 
-        // 7 colonne fisse
-        for (let i = 0; i < 7; i++) {
+        // Fisse 1-6
+        for (let i = 0; i < 6; i++) {
             const td = document.createElement("td");
             td.textContent = row[i] || "";
             tr.appendChild(td);
         }
 
-        // 2 colonne dinamiche
-        for (let i = 0; i < 2; i++) {
+        // Dinamiche (3 colonne)
+        for (let i = 0; i < 3; i++) {
             const td = document.createElement("td");
             td.className = "rotating";
-            td.textContent = row[7 + extraIndex + i] || "";
+            td.textContent = row[6 + extraIndex + i] || "";
             tr.appendChild(td);
         }
+
+        // Fissa 16
+        const tdLast = document.createElement("td");
+        tdLast.textContent = row[15] || "";
+        tr.appendChild(tdLast);
 
         tbody.appendChild(tr);
     });
 }
 
-// Rotazione colonne
+// Rotazione ogni 6 secondi
 setInterval(() => {
-    extraIndex = (extraIndex + 2) % 10;
+    extraIndex = (extraIndex + 3) % 9; // 9 colonne dinamiche (7→15)
     render();
-}, 7000);
+}, 6000);
 
-// Reload CSV
+// Reload CSV ogni minuto
 setInterval(loadData, 60000);
 
-// Start
 loadData();
 </script>
 
