@@ -22,31 +22,37 @@ body {
     background: var(--bg);
     color: var(--text);
     font-family: 'Montserrat', sans-serif;
+    width:100vw;
+    height:100vh;
 }
 
 header {
     text-align:center;
-    font-size:50px;
-    padding:20px;
+    font-size:4vw;
+    padding:1vh;
     color:var(--accent);
 }
 
 table {
     width:100%;
+    height:90vh;
     border-collapse:separate;
     border-spacing:6px;
-    table-layout:fixed; /* 🔥 colonne fisse */
+    table-layout:fixed;
 }
 
 th {
-    font-size:20px;
+    font-size:1.2vw;
     color:#888;
+}
+
+td {
+    font-size:50px; /* 🔥 richiesto */
 }
 
 td, th {
     background:var(--cell);
     padding:10px;
-    height:70px;
     overflow:hidden;
     white-space:nowrap;
     text-overflow:ellipsis;
@@ -64,9 +70,14 @@ td, th {
 .cancelled { color: #ff3b3b; }
 .pending { color: #ffd000; }
 
-/* effetto flip */
-.flip {
+/* flip colonne */
+.flip-col {
     animation: flip 0.6s ease;
+}
+
+/* flip riga */
+.flip-row {
+    animation: flip 0.8s ease;
 }
 
 @keyframes flip {
@@ -91,6 +102,8 @@ let headers = [];
 let extraIndex = 0;
 let pageIndex = 0;
 
+let lastExtraIndex = 0;
+
 const ROWS_PER_PAGE = 10;
 
 function loadData() {
@@ -100,7 +113,7 @@ function loadData() {
         complete: function(results) {
             headers = results.data[0];
             allData = results.data.slice(1);
-            render();
+            render(true); // full refresh
         }
     });
 }
@@ -115,7 +128,7 @@ function getStatusClass(value) {
     return "";
 }
 
-function render() {
+function render(isPageChange = false) {
     const tbody = document.getElementById("board-body");
     tbody.innerHTML = "";
 
@@ -148,44 +161,57 @@ function render() {
     pageData.forEach(row => {
         const tr = document.createElement("tr");
 
+        // flip riga SOLO cambio pagina
+        if (isPageChange) {
+            tr.classList.add("flip-row");
+        }
+
+        // colonne fisse
         for (let i = 0; i < 6; i++) {
             const td = document.createElement("td");
             td.textContent = row[i] || "";
-            td.classList.add("flip");
             tr.appendChild(td);
         }
 
+        // colonne dinamiche
         for (let i = 0; i < 3; i++) {
             const td = document.createElement("td");
             td.textContent = row[6 + extraIndex + i] || "";
-            td.classList.add("flip");
+
+            // flip SOLO se cambiano colonne
+            if (extraIndex !== lastExtraIndex) {
+                td.classList.add("flip-col");
+            }
+
             tr.appendChild(td);
         }
 
+        // ultima colonna
         const tdLast = document.createElement("td");
         tdLast.textContent = row[15] || "";
         tdLast.classList.add(getStatusClass(row[15]));
-        tdLast.classList.add("flip");
         tr.appendChild(tdLast);
 
         tbody.appendChild(tr);
     });
+
+    lastExtraIndex = extraIndex;
 }
 
-// rotazione colonne
+// 🔄 colonne ogni 20 sec
 setInterval(() => {
     extraIndex = (extraIndex + 3) % 9;
-    render();
-}, 6000);
+    render(false);
+}, 20000);
 
-// paginazione righe
+// 📄 pagina ogni 60 sec
 setInterval(() => {
     pageIndex++;
     if (pageIndex * ROWS_PER_PAGE >= allData.length) {
         pageIndex = 0;
     }
-    render();
-}, 8000);
+    render(true);
+}, 60000);
 
 // reload CSV
 setInterval(loadData, 60000);
