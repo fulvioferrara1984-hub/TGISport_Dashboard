@@ -108,7 +108,7 @@ td {
 <img src="TGILogo.png" alt="Logo" style="height: 1.0em; width: auto;">
 </header>-->
 <header style="background-color: rgb(53, 171, 249); display: flex; align-items: center; justify-content: space-between; padding: 10px 20px; color: black;">
-  <h1 style="margin: 0; font-size: 1.0em;">LIVE4 VIRTUAL DASHBOARD</h1>
+  <h1 style="margin: 0; font-size: 1.0em;">LIVE5 VIRTUAL DASHBOARD</h1>
 
   <!-- Contenitore per l'effetto alternanza -->
   <div style="position: relative; height: 1.0em; display: flex; align-items: center; justify-content: flex-end;">
@@ -249,8 +249,6 @@ function render(isPageChange = false) {
 
     // 3 colonne dinamiche
     for (let i = 0; i < 3; i++) {
-        setTimeout(function() {
-    // Questo codice verrà eseguito dopo 1000 millisecondi (1 secondo)
         const th = document.createElement("th");
         th.textContent = headers[7 + extraIndex + i] || "";
         //th.style.color = "var(--accent)";
@@ -258,9 +256,6 @@ function render(isPageChange = false) {
         th.classList.add("col-mediumlarge");
         }
         headerRow.appendChild(th);
-    // Se hai altre azioni, devono stare qui dentro
-    }, 1000);
-       
     }
 
     const thLast = document.createElement("th");
@@ -320,7 +315,6 @@ function render(isPageChange = false) {
 
         // colonne dinamiche
         for (let i = 0; i < 3; i++) {
-            setTimeout(function() {
              const td = document.createElement("td");
             td.textContent = row[7 + extraIndex + i] || "";
             if (i==2) {
@@ -331,8 +325,6 @@ function render(isPageChange = false) {
                 td.classList.add("flip-col");
             }
             tr.appendChild(td);
-        // Se hai altre azioni, devono stare qui dentro
-        }, 1000);
         }
 
         // ultima colonna
