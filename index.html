@@ -109,7 +109,7 @@ td {
 <img src="TGILogo.png" alt="Logo" style="height: 1.0em; width: auto;">
 </header>-->
 <header style="background-color: rgb(53, 171, 249); display: flex; align-items: center; justify-content: space-between; padding: 10px 20px; color: black;">
-  <h1 style="margin: 0; font-size: 1.0em;">LIVE7 VIRTUAL DASHBOARD</h1>
+  <h1 style="margin: 0; font-size: 1.0em;">LIVE8 VIRTUAL DASHBOARD</h1>
 
   <!-- Contenitore per l'effetto alternanza -->
   <div style="position: relative; height: 1.0em; display: flex; align-items: center; justify-content: flex-end;">
@@ -205,6 +205,30 @@ function getStatusClass(value) {
     return "";
 }
 
+function rollingText(element, finalText, duration = 400) {
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    let iterations = 0;
+
+    const interval = setInterval(() => {
+        element.textContent = finalText
+            .split("")
+            .map((char, index) => {
+                if (index < iterations) {
+                    return finalText[index];
+                }
+                return chars[Math.floor(Math.random() * chars.length)];
+            })
+            .join("");
+
+        iterations += 1 / 2;
+
+        if (iterations >= finalText.length) {
+            clearInterval(interval);
+            element.textContent = finalText;
+        }
+    }, 30);
+}
+    
 function render(isPageChange = false) {
     const tbody = document.getElementById("board-body");
     tbody.innerHTML = "";
@@ -346,14 +370,22 @@ function render(isPageChange = false) {
         if (extraIndex !== lastExtraIndex) {
             // prima svuoto (opzionale ma consigliato)
             td.textContent = "";
+            
             setTimeout(() => {
                 td.textContent = value;
                 td.classList.add("flip-col");
-            }, i * 200); // 🔥 delay progressivo
-            } else {
-            // primo render senza delay
-            td.textContent = value;
-            }
+                rollingText(td, value); // 🔥 effetto rolling
+            }, i * 500);
+            
+            
+            //setTimeout(() => {
+            //    td.textContent = value;
+            //    td.classList.add("flip-col");
+            //}, i * 200); // 🔥 delay progressivo
+            //} else {
+            //// primo render senza delay
+            //td.textContent = value;
+            //}
         }
 
         
