@@ -89,7 +89,7 @@ td {
 }
 
 .logo-img {
-    max-height: 15px;
+    max-height: 16px;
     max-width: 100%;
     object-fit: contain;
 }
@@ -100,7 +100,7 @@ td {
 <body>
 
 <header style="background-color: rgb(53, 171, 249); display: flex; align-items: center; justify-content: space-between;padding: 10px 20px; color: black;">
-<h1 style="margin: 0; font-size: 1.0em;">LIVE3 VIRTUAL DASHBOARD</h1>
+<h1 style="margin: 0; font-size: 1.0em;">LIVE4 VIRTUAL DASHBOARD</h1>
   <!-- Il logo a destra -->
 <img src="TGILogo.png" alt="Logo" style="height: 1.0em; width: auto;">
 </header>
@@ -136,7 +136,7 @@ function getStatusClass(value) {
     if (!value) return "";
     value = value.toUpperCase();
 
-    if (value.includes("CONFIRMED") && !value.includes("NOT")) return "confirmed";
+    if (value.includes("CONFIRMED")) return "confirmed";
     if (value.includes("CANCELLED")) return "cancelled";
     if (value.includes("PENDING")) return "pending";
     return "";
@@ -169,7 +169,11 @@ function render(isPageChange = false) {
     for (let i = 3; i < 7; i++) {
     const th = document.createElement("th");
     th.textContent = headers[i] || "";
-    th.classList.add("col-normal");
+    if (i==4) {
+        th.classList.add("col-small");
+        } else
+        th.classList.add("col-normal");
+    }
     headerRow.appendChild(th);
     }
 
