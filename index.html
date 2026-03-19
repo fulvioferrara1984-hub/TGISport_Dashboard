@@ -140,9 +140,6 @@ let pageIndex = 0;
 let lastExtraIndex = 0;
 
 const ROWS_PER_PAGE = 10;
-
-// Funzione di supporto (da scrivere una volta sola)
-const delay = ms => new Promise(res => setTimeout(res, ms));
     
     //alternanza logo e orario
     const logo = document.getElementById('headerLogo');
@@ -207,7 +204,7 @@ function getStatusClass(value) {
     return "";
 }
 
-async function render(isPageChange = false) {
+function render(isPageChange = false) {
     const tbody = document.getElementById("board-body");
     tbody.innerHTML = "";
 
@@ -259,7 +256,6 @@ async function render(isPageChange = false) {
         th.classList.add("col-mediumlarge");
         }
         headerRow.appendChild(th);
-        await delay(1000);
     }
 
     const thLast = document.createElement("th");
@@ -329,7 +325,6 @@ async function render(isPageChange = false) {
                 td.classList.add("flip-col");
             }
             tr.appendChild(td);
-            await delay(1000);
         }
 
         // ultima colonna
