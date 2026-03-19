@@ -61,8 +61,7 @@ td, th {
 td {
     font-size:1.1vw; /* 🔥 richiesto */
     height: 20px;
-    font-variant-numeric: tabular-nums;
-    letter-spacing: 2px;
+    transition: font-family 0.2s ease;
 }
 
 /* larghezze specifiche */
@@ -84,6 +83,12 @@ td {
     backface-visibility: hidden;
 }
 
+.rolling-active {
+    font-family: 'Courier New', monospace;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 2px;
+}
+    
 /* flip riga */
 .flip-row {
     animation: flip 0.8s ease;
@@ -111,7 +116,7 @@ td {
 <img src="TGILogo.png" alt="Logo" style="height: 1.0em; width: auto;">
 </header>-->
 <header style="background-color: rgb(53, 171, 249); display: flex; align-items: center; justify-content: space-between; padding: 10px 20px; color: black;">
-  <h1 style="margin: 0; font-size: 1.0em;">LIVE9 VIRTUAL DASHBOARD</h1>
+  <h1 style="margin: 0; font-size: 1.0em;">LIVE1 VIRTUAL DASHBOARD</h1>
 
   <!-- Contenitore per l'effetto alternanza -->
   <div style="position: relative; height: 1.0em; display: flex; align-items: center; justify-content: flex-end;">
@@ -207,9 +212,11 @@ function getStatusClass(value) {
     return "";
 }
 
-function rollingText(element, finalText, duration = 400) {
+function rollingText(element, finalText) {
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     let iterations = 0;
+
+    element.classList.add("rolling-active"); // 🔥 attiva font speciale
 
     const interval = setInterval(() => {
         element.textContent = finalText
@@ -222,11 +229,14 @@ function rollingText(element, finalText, duration = 400) {
             })
             .join("");
 
-        iterations += 1 / 2;
+        iterations += 0.5;
 
         if (iterations >= finalText.length) {
             clearInterval(interval);
             element.textContent = finalText;
+
+            // 🔥 torna al font normale
+            element.classList.remove("rolling-active");
         }
     }, 30);
 }
