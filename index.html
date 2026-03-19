@@ -108,7 +108,7 @@ td {
 <img src="TGILogo.png" alt="Logo" style="height: 1.0em; width: auto;">
 </header>-->
 <header style="background-color: rgb(53, 171, 249); display: flex; align-items: center; justify-content: space-between; padding: 10px 20px; color: black;">
-  <h1 style="margin: 0; font-size: 1.0em;">LIVE7 VIRTUAL DASHBOARD</h1>
+  <h1 style="margin: 0; font-size: 1.0em;">LIVE8 VIRTUAL DASHBOARD</h1>
 
   <!-- Contenitore per l'effetto alternanza -->
   <div style="position: relative; height: 1.0em; display: flex; align-items: center; justify-content: flex-end;">
@@ -141,6 +141,9 @@ let lastExtraIndex = 0;
 
 const ROWS_PER_PAGE = 10;
 
+// Funzione di supporto (da scrivere una volta sola)
+const delay = ms => new Promise(res => setTimeout(res, ms));
+    
     //alternanza logo e orario
     const logo = document.getElementById('headerLogo');
     const dateTimeDisplay = document.getElementById('headerDateTime');
