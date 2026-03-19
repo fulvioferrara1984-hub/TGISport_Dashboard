@@ -65,6 +65,7 @@ td {
 
 /* larghezze specifiche */
 .col-small { width:6%; }
+.col-medium { width:7%; }
 .col-logo { width:4%; }
 .col-xsmall { width:5%; }
 .col-normal { width:auto; }
@@ -101,7 +102,7 @@ td {
 <body>
 
 <header style="background-color: rgb(53, 171, 249); display: flex; align-items: center; justify-content: space-between;padding: 10px 20px; color: black;">
-<h1 style="margin: 0; font-size: 1.0em;">LIVE6 VIRTUAL DASHBOARD</h1>
+<h1 style="margin: 0; font-size: 1.0em;">LIVE7 VIRTUAL DASHBOARD</h1>
   <!-- Il logo a destra -->
 <img src="TGILogo.png" alt="Logo" style="height: 1.0em; width: auto;">
 </header>
@@ -172,6 +173,10 @@ function render(isPageChange = false) {
     th.textContent = headers[i] || "";
     if (i==4) {
         th.classList.add("col-xsmall");
+        } else if (i==5) {
+        th.classList.add("col-medium");
+        } else if (i==6) {
+        th.classList.add("col-medium");
         } else {
         th.classList.add("col-normal");
     }
@@ -225,9 +230,13 @@ function render(isPageChange = false) {
         td.textContent = row[i] || "";
         if (i==4) {
             td.classList.add("col-xsmall");
-            } else {
+        } else if (i==5) {
+            td.classList.add("col-medium");
+        } else if (i==6) {
+            td.classList.add("col-medium");
+        } else {
             td.classList.add("col-normal");
-        }
+    }
         tr.appendChild(td);
         }
 
