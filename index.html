@@ -102,7 +102,7 @@ td {
 <body>
 
 <header style="background-color: rgb(53, 171, 249); display: flex; align-items: center; justify-content: space-between;padding: 10px 20px; color: black;">
-<h1 style="margin: 0; font-size: 1.0em;">LIVE9 VIRTUAL DASHBOARD</h1>
+<h1 style="margin: 0; font-size: 1.0em;">LIVE1 VIRTUAL DASHBOARD</h1>
   <!-- Il logo a destra -->
 <img src="TGILogo.png" alt="Logo" style="height: 1.0em; width: auto;">
 </header>
@@ -196,6 +196,7 @@ function render(isPageChange = false) {
 
     const thLast = document.createElement("th");
     thLast.textContent = headers[16] || "";
+    thLast.classList.add("col-medium");
     headerRow.appendChild(thLast);
 
     tbody.appendChild(headerRow);
@@ -265,6 +266,7 @@ function render(isPageChange = false) {
         const tdLast = document.createElement("td");
         tdLast.textContent = row[16] || "";
         tdLast.classList.add(getStatusClass(row[16]));
+        tdLast.classList.add("col-medium");
         tr.appendChild(tdLast);
 
         tbody.appendChild(tr);
