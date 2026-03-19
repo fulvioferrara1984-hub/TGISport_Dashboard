@@ -108,7 +108,7 @@ td {
 <img src="TGILogo.png" alt="Logo" style="height: 1.0em; width: auto;">
 </header>-->
 <header style="background-color: rgb(53, 171, 249); display: flex; align-items: center; justify-content: space-between; padding: 10px 20px; color: black;">
-  <h1 style="margin: 0; font-size: 1.0em;">LIVE2 VIRTUAL DASHBOARD</h1>
+  <h1 style="margin: 0; font-size: 1.0em;">LIVE3 VIRTUAL DASHBOARD</h1>
 
   <!-- Contenitore per l'effetto alternanza -->
   <div style="position: relative; height: 1.0em; display: flex; align-items: center; justify-content: flex-end;">
@@ -342,22 +342,8 @@ function render(isPageChange = false) {
 
 // 🔄 colonne ogni 20 sec
 setInterval(() => {
-   // 1. Cambia la prima colonna extra
-    extraIndex = (extraIndex + 1) % 9;
+    extraIndex = (extraIndex + 3) % 9;
     render(false);
-
-    // 2. Dopo 1 secondo, cambia la seconda
-    setTimeout(() => {
-        extraIndex = (extraIndex + 1) % 9;
-        render(false);
-        
-        // 3. Dopo un altro secondo (2 in totale), cambia la terza
-        setTimeout(() => {
-            extraIndex = (extraIndex + 1) % 9;
-            render(false);
-        }, 1000);
-
-    }, 1000);
 }, 20000);
 
 // 📄 pagina ogni 60 sec
