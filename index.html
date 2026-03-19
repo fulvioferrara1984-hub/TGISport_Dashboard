@@ -66,16 +66,25 @@
     let allData = [];
     let extraIndex = 0;
 
-    async function loadData() {
-        // Carica il file CSV locale o remoto
-        Papa.parse("eventi.csv", {
-            download: true, header: false, skipEmptyLines: true,
+        async function loadData() {
+        // Aggiungiamo un numero casuale alla fine per forzare GitHub a darci il file fresco
+        const cacheBuster = "?v=" + new Date().getTime();
+        
+        Papa.parse("eventi.csv" + cacheBuster, {
+            download: true, 
+            header: false, 
+            skipEmptyLines: true,
             complete: function(results) {
-                allData = results.data.slice(1); // Esclude l'intestazione del CSV
+                console.log("Dati caricati:", results.data); // Verifica in console se arrivano
+                allData = results.data.filter(row => row.length > 1); // Salta righe vuote
                 render();
+            },
+            error: function(err) {
+                console.error("Errore nel caricamento CSV:", err);
             }
         });
     }
+
 
     function render() {
         const tbody = document.getElementById('board-body');
