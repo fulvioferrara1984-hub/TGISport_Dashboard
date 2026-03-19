@@ -1,23 +1,42 @@
-DATE,TIME (CET),SPORT,COMPETITION,TEAM A,TEAM B,Location,Video format,Operator,Tracking type,Virtual feed,Supervisor,Carrier IN,Carrier OUT,PM,Status,Logo
-26/03/26,20:45,Football,WCQ - Europe,Polonia,Albania,MCR2,1080i50, Fill in ,PGMOnly,1, Fill in , Fiber - ESSA , SAT - EIT , Fulvio Ferrara ,Confirmed,POL-ALB_V2.png
-26/03/26,20:45,Football,WCQ - Europe,Italy,Northern Ireland,MCR2,1080i50, Fill in ,Tracking1,1, Fill in , Fiber - EIT , Fiber - EIT , Fulvio Ferrara ,Confirmed,POL-ALB_V2.png
-28/03/26,19:00,Football,Friendly,Scotland,Japan,MCR2,1080i50, Fill in ,PGMOnly,1, Fill in , Fiber - ESSA , Fiber - ESSA , Fulvio Ferrara ,Confirmed,POL-ALB_V2.png
-28/03/26,20:30,Football,Friendly,USA,Belgium,MCR2,1080i60, Fill in ,PGMOnly,1, Fill in , Fiber - ESSA , Fiber - ESSA , Fulvio Ferrara ,Cancelled,POL-ALB_V2.png
-29/03/26,03:00,Football,Friendly,Mexico,Portugal,MCR2,1080i60, Fill in ,PGMOnly,1, Fill in , TBC , TBC , Fulvio Ferrara ,Confirmed,POL-ALB_V2.png
-31/03/26,01:00,Football,Friendly,USA,Portugal,MCR2,1080i60, Fill in ,PGMOnly,1, Fill in , TBC , TBC , Fulvio Ferrara ,Confirmed,POL-ALB_V2.png
-31/03/26,20:45,Football,WCQ - Europe,TBC,Albania,MCR2,1080i50, Fill in ,PGMOnly,1, Fill in , Fiber - ESSA , SAT - EIT , Fulvio Ferrara ,Not confirmed,Uefa.png
-31/03/26,20:45,Football,Dentsu friendly,Englad,Japan,MCR2,1080p50, Fill in ,PGMOnly,1, Fill in , Fiber - ESSA , Fiber - ESSA , Fulvio Ferrara ,Confirmed,Uefa.png
-10/04/26,03:00,Tennis,BJK Cup,Australia,Great Britain,MCR2,1080i60, Fill in ,PGMOnly,1, Fill in , SRT-Telstra , SRT-EIT , Fulvio Ferrara ,Confirmed,Uefa.png
-10/04/26,10:00,Tennis,BJK Cup,Kazakhstan,Canada,MCR2,1080i50, Fill in ,PGMOnly,1, Fill in , SRT-Telstra , SRT-EIT , Fulvio Ferrara ,Confirmed,SerieA_V2.png
-10/04/26,11:00,Tennis,BJK Cup,Italy,Japan,MCR2,1080i50, Fill in ,PGMOnly,1, Fill in , SRT-Telstra , SRT-EIT , Fulvio Ferrara ,Confirmed,SerieA_V2.png
-10/04/26,12:00,Tennis,BJK Cup,Switzerland,Czechia,MCR2,1080i50, Fill in ,PGMOnly,1, Fill in , SRT-Telstra , SRT-EIT , Fulvio Ferrara ,Confirmed,SerieA_V2.png
-10/04/26,12:00,Tennis,BJK Cup,Slovenia,Spain,MCR2,1080i50, Fill in ,PGMOnly,1, Fill in , SRT-Telstra , SRT-EIT , Fulvio Ferrara ,Confirmed,SerieA_V2.png
-10/04/26,15:00,Tennis,BJK Cup,Belgium,USA,MCR1,1080i50, Fill in ,PGMOnly,1, Fill in , SRT-Telstra , SRT-EIT , Fulvio Ferrara ,Confirmed,Ligue1_V2.png
-10/04/26,15:00,Tennis,BJK Cup,Poland,Ukraine,MCR1,1080i50, Fill in ,PGMOnly,1, Fill in , SRT-Telstra , SRT-EIT , Fulvio Ferrara ,Confirmed,Ligue1_V2.png
-11/04/26,03:00,Tennis,BJK Cup,Australia,Great Britain,MCR2,1080i60, Fill in ,PGMOnly,1, Fill in , SRT-Telstra , SRT-EIT , Fulvio Ferrara ,Confirmed,Ligue1_V2.png
-11/04/26,09:00,Tennis,BJK Cup,Kazakhstan,Canada,MCR2,1080i50, Fill in ,PGMOnly,1, Fill in , SRT-Telstra , SRT-EIT , Fulvio Ferrara ,Confirmed,BJKC_V2.png
-11/04/26,09:00,Tennis,BJK Cup,Italy,Japan,MCR2,1080i50, Fill in ,PGMOnly,1, Fill in , SRT-Telstra , SRT-EIT , Fulvio Ferrara ,Confirmed,BJKC_V2.png
-11/04/26,10:00,Tennis,BJK Cup,Slovenia,Spain,MCR2,1080i50, Fill in ,PGMOnly,1, Fill in , SRT-Telstra , SRT-EIT , Fulvio Ferrara ,Confirmed,BJKC_V2.png
-11/04/26,11:00,Tennis,BJK Cup,Poland,Ukraine,MCR1,1080i50, Fill in ,PGMOnly,1, Fill in , SRT-Telstra , SRT-EIT , Fulvio Ferrara ,Confirmed,BJKC_V2.png
-11/04/26,12:00,Tennis,BJK Cup,Switzerland,Czechia,MCR1,1080i50, Fill in ,PGMOnly,1, Fill in , SRT-Telstra , SRT-EIT , Fulvio Ferrara ,Confirmed,BJKC_V2.png
-11/04/26,13:00,Tennis,BJK Cup,Belgium,USA,MCR1,1080i50, Fill in ,PGMOnly,1, Fill in , SRT-Telstra , SRT-EIT , Fulvio Ferrara ,Confirmed,BJKC_V2.png
+DATE,TIME (CET),SPORT,COMPETITION,ROUND,TEAM A,TEAM B,LOCATION,VIDEO FORMAT,OPERATOR,TRACKING TYPE,VIRT. OUTPUTS,SUPERVISOR,CARRIER IN,CARRIER OUT,PM,STATUS,LOGO
+26/03/26,20:45,Football,WCQ - Europe,SF,Italy,North. Ireland,MCR2,1080i50,M.Molinari,Tracking1,1,S.Pedatella, Fiber - EIT , Fiber - EIT ,F.Ferrara,Confirmed,Uefa.png
+26/03/26,20:45,Football,WCQ - Europe,SF,Poland,Albania,MCR2,1080i50,A.Colzani,PGMOnly,1,S.Pedatella, Fiber - Eurovision, SAT - EIT ,F.Ferrara,Confirmed,Uefa.png
+28/03/26,19:00,Football,Friendly,H2H,Scotland,Japan,MCR2,1080i50,E.Colognese,PGMOnly,1,F.Ferrara, Fiber - Eurovision, Fiber - Eurovision,F.Ferrara,Confirmed,Uefa.png
+28/03/26,20:30,Football,Friendly,H2H,USA,Belgium,MCR2,1080i60,,PGMOnly,1,, Fiber - Eurovision, Fiber - Eurovision,F.Ferrara,Cancelled,Uefa.png
+29/03/26,03:00,Football,Friendly,H2H,Mexico,Portugal,MCR2,1080i60,M.Molinari,PGMOnly,1,F.Ferrara, TBC , TBC ,F.Ferrara,Confirmed,Uefa.png
+31/03/26,01:00,Football,Friendly,H2H,USA,Portugal,MCR2,1080i60,M.Molinari,PGMOnly,1,F.Gennaro, TBC , TBC ,F.Ferrara,Confirmed,Uefa.png
+31/03/26,20:45,Football,Dentsu friendly,H2H,Englad,Japan,MCR2,1080p50,M.Molinari,PGMOnly,1,A.Altafini, Fiber - Eurovision, Fiber - Eurovision,F.Ferrara,Confirmed,Uefa.png
+31/03/26,20:45,Football,WCQ - Europe,F,TBC,Albania,MCR2,1080i50,TBC,PGMOnly,1,A.Altafini, Fiber - Eurovision, SAT - EIT ,F.Ferrara,Pending,Uefa.png
+04/04/26,15:00,Football,Serie A,31,Lecce,Atalanta,MCR1,1080p50,D.Colombo,PGMOnly,7,S.Pedatella, Fiber - Eurovision, Fiber - Eurovision,S.Pedatella,Confirmed,SerieA_V2.png
+04/04/26,15:00,Football,Serie A,31,Sassuolo,Cagliari,MCR1,1080p50,A.Aleotti,PGMOnly,7,S.Pedatella, Fiber - Eurovision, Fiber - Eurovision,S.Pedatella,Confirmed,SerieA_V2.png
+04/04/26,18:00,Football,Serie A,31,Hellas Verona,Fiorentina,MCR1,1080p50,E.Colognese,PGMOnly,7,A.Altafini, Fiber - Eurovision, Fiber - Eurovision,S.Pedatella,Confirmed,SerieA_V2.png
+04/04/26,20:45,Football,Serie A,31,Lazio,Parma,MCR1,1080p50,A.Colzani,PGMOnly,7,F.Gennaro, Fiber - Eurovision, Fiber - Eurovision,S.Pedatella,Confirmed,SerieA_V2.png
+05/04/26,15:00,Football,Serie A,31,Cremonese,Bologna,MCR1,1080p50,A.Pellegrin,PGMOnly,7,S.Pedatella, Fiber - Eurovision, Fiber - Eurovision,S.Pedatella,Confirmed,SerieA_V2.png
+05/04/26,18:00,Football,Serie A,31,Pisa,Torino,MCR1,1080p50,F.Altafini,PGMOnly,7,F.Gennaro, Fiber - Eurovision, Fiber - Eurovision,S.Pedatella,Confirmed,SerieA_V2.png
+05/04/26,20:45,Football,Serie A,31,Inter,Roma,MCR1,1080p50,F.Marchini,PGMOnly,7,F.Gennaro, Fiber - Eurovision, Fiber - Eurovision,S.Pedatella,Confirmed,SerieA_V2.png
+05/04/26,15:00,Football,Ligue1,28,Angers,O. Lyonnais,MCR2,1080i50,D.Colombo,Tracking1,3,A.Altafini,Fiber - Globecast,Fiber - Globecast,A.Altafini,Confirmed,Ligue1_V2.png
+06/04/26,15:00,Football,Serie A,31,Udinese,Como,MCR1,1080p50,S.Fabozzi,PGMOnly,7,A.Altafini, Fiber - Eurovision, Fiber - Eurovision,S.Pedatella,Confirmed,SerieA_V2.png
+06/04/26,18:00,Football,Serie A,31,Juventus,Genoa,MCR1,1080p50,F.Marchini,PGMOnly,7,F.Gennaro, Fiber - Eurovision, Fiber - Eurovision,S.Pedatella,Confirmed,SerieA_V2.png
+06/04/26,20:45,Football,Serie A,31,Napoli,Milan,MCR1,1080p50,M.Molinari,PGMOnly,7,F.Gennaro, Fiber - Eurovision, Fiber - Eurovision,S.Pedatella,Confirmed,SerieA_V2.png
+10/04/26,03:00,Tennis,BJK Cup,QR,Australia,Great Britain,MCR2,1080i60,TBD,PGMOnly,1,F.Ferrara, SRT-Telstra , SRT-EIT ,F.Ferrara,Confirmed,BJKC_V2.png
+10/04/26,10:00,Tennis,BJK Cup,QR,Kazakhstan,Canada,MCR2,1080i50,TBD,PGMOnly,1,F.Ferrara, SRT-Telstra , SRT-EIT ,F.Ferrara,Confirmed,BJKC_V2.png
+10/04/26,11:00,Tennis,BJK Cup,QR,Italy,Japan,MCR2,1080i50,TBD,PGMOnly,1,A.Altafini, SRT-Telstra , SRT-EIT ,F.Ferrara,Confirmed,BJKC_V2.png
+10/04/26,12:00,Tennis,BJK Cup,QR,Slovenia,Spain,MCR2,1080i50,TBD,PGMOnly,1,A.Altafini, SRT-Telstra , SRT-EIT ,F.Ferrara,Confirmed,BJKC_V2.png
+10/04/26,12:00,Tennis,BJK Cup,QR,Switzerland,Czechia,MCR2,1080i50,TBD,PGMOnly,1,A.Altafini, SRT-Telstra , SRT-EIT ,F.Ferrara,Confirmed,BJKC_V2.png
+10/04/26,15:00,Tennis,BJK Cup,QR,Belgium,USA,MCR1,1080i50,TBD,PGMOnly,1,F.Gennaro, SRT-Telstra , SRT-EIT ,F.Ferrara,Confirmed,BJKC_V2.png
+10/04/26,15:00,Tennis,BJK Cup,QR,Poland,Ukraine,MCR1,1080i50,TBD,PGMOnly,1,F.Gennaro, SRT-Telstra , SRT-EIT ,F.Ferrara,Confirmed,BJKC_V2.png
+11/04/26,03:00,Tennis,BJK Cup,QR,Australia,Great Britain,MCR2,1080i60,TBD,PGMOnly,1,F.Ferrara, SRT-Telstra , SRT-EIT ,F.Ferrara,Confirmed,BJKC_V2.png
+11/04/26,09:00,Tennis,BJK Cup,QR,Italy,Japan,MCR2,1080i50,TBD,PGMOnly,1,F.Ferrara, SRT-Telstra , SRT-EIT ,F.Ferrara,Confirmed,BJKC_V2.png
+11/04/26,09:00,Tennis,BJK Cup,QR,Kazakhstan,Canada,MCR2,1080i50,TBD,PGMOnly,1,S.Pedatella, SRT-Telstra , SRT-EIT ,F.Ferrara,Confirmed,BJKC_V2.png
+11/04/26,10:00,Tennis,BJK Cup,QR,Slovenia,Spain,MCR2,1080i50,TBD,PGMOnly,1,S.Pedatella, SRT-Telstra , SRT-EIT ,F.Ferrara,Confirmed,BJKC_V2.png
+11/04/26,11:00,Tennis,BJK Cup,QR,Poland,Ukraine,MCR1,1080i50,TBD,PGMOnly,1,F.Gennaro, SRT-Telstra , SRT-EIT ,F.Ferrara,Confirmed,BJKC_V2.png
+11/04/26,12:00,Tennis,BJK Cup,QR,Switzerland,Czechia,MCR1,1080i50,TBD,PGMOnly,1,F.Gennaro, SRT-Telstra , SRT-EIT ,F.Ferrara,Confirmed,BJKC_V2.png
+11/04/26,13:00,Tennis,BJK Cup,QR,Belgium,USA,MCR1,1080i50,TBD,PGMOnly,1,F.Gennaro, SRT-Telstra , SRT-EIT ,F.Ferrara,Confirmed,BJKC_V2.png
+11/04/26,TBD,Football,Ligue1,29,Lens,PSG,MCR2,1080i50,TBD,Tracking1,3,A.Altafini,Fiber - Globecast,Fiber - Globecast,A.Altafini,Confirmed,Ligue1_V2.png
+12/04/26,TBD,Football,Serie A,32,Atalanta,Juventus,MCR1,1080p50,TBD,PGMOnly,7,A.Altafini, Fiber - Eurovision, Fiber - Eurovision,S.Pedatella,Confirmed,SerieA_V2.png
+12/04/26,TBD,Football,Serie A,32,Bologna,Lecce,MCR1,1080p50,TBD,PGMOnly,7,A.Altafini, Fiber - Eurovision, Fiber - Eurovision,S.Pedatella,Confirmed,SerieA_V2.png
+12/04/26,TBD,Football,Serie A,32,Cagliari,Cremonese,MCR1,1080p50,TBD,PGMOnly,7,S.Pedatella, Fiber - Eurovision, Fiber - Eurovision,S.Pedatella,Confirmed,SerieA_V2.png
+12/04/26,TBD,Football,Serie A,32,Como,Inter,MCR1,1080p50,TBD,PGMOnly,7,S.Pedatella, Fiber - Eurovision, Fiber - Eurovision,S.Pedatella,Confirmed,SerieA_V2.png
+12/04/26,TBD,Football,Serie A,32,Fiorentina,Lazio,MCR1,1080p50,TBD,PGMOnly,7,S.Pedatella, Fiber - Eurovision, Fiber - Eurovision,S.Pedatella,Confirmed,SerieA_V2.png
+12/04/26,TBD,Football,Serie A,32,Genoa,Sassuolo,MCR1,1080p50,TBD,PGMOnly,7,F.Gennaro, Fiber - Eurovision, Fiber - Eurovision,S.Pedatella,Confirmed,SerieA_V2.png
+12/04/26,TBD,Football,Serie A,32,Milan ,Udinese,MCR1,1080p50,TBD,PGMOnly,7,F.Gennaro, Fiber - Eurovision, Fiber - Eurovision,S.Pedatella,Confirmed,SerieA_V2.png
