@@ -111,7 +111,7 @@ td {
 <img src="TGILogo.png" alt="Logo" style="height: 1.0em; width: auto;">
 </header>-->
 <header style="background-color: rgb(53, 171, 249); display: flex; align-items: center; justify-content: space-between; padding: 10px 20px; color: black;">
-  <h1 style="margin: 0; font-size: 1.0em;">LIVE8 VIRTUAL DASHBOARD</h1>
+  <h1 style="margin: 0; font-size: 1.0em;">LIVE9 VIRTUAL DASHBOARD</h1>
 
   <!-- Contenitore per l'effetto alternanza -->
   <div style="position: relative; height: 1.0em; display: flex; align-items: center; justify-content: flex-end;">
@@ -360,11 +360,9 @@ function render(isPageChange = false) {
         // nuova versione delle colonne dinamiche con attesa di 500 ms
         for (let i = 0; i < 3; i++) {
         const td = document.createElement("td");
-
-        if (i == 2) {
-            td.classList.add("col-mediumlarge");
-        }
-
+            if (i == 2) {
+                td.classList.add("col-mediumlarge");
+            }
         tr.appendChild(td);
 
         const value = row[7 + extraIndex + i] || "";
@@ -374,7 +372,6 @@ function render(isPageChange = false) {
             td.textContent = "";
             
             setTimeout(() => {
-                td.textContent = value;
                 td.classList.add("flip-col");
                 rollingText(td, value); // 🔥 effetto rolling
             }, i * 500);
@@ -388,6 +385,9 @@ function render(isPageChange = false) {
             //// primo render senza delay
             //td.textContent = value;
             //}
+        } else {
+            td.textContent = value;
+        }
         }
 
         
