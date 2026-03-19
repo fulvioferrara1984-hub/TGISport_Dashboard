@@ -66,6 +66,7 @@ td {
 /* larghezze specifiche */
 .col-small { width:6%; }
 .col-logo { width:4%; }
+.col-xsmall { width:5%; }
 .col-normal { width:auto; }
 
 /* colori stato */
@@ -170,7 +171,7 @@ function render(isPageChange = false) {
     const th = document.createElement("th");
     th.textContent = headers[i] || "";
     if (i==4) {
-        th.classList.add("col-small");
+        th.classList.add("col-xsmall");
         } else {
         th.classList.add("col-normal");
     }
@@ -222,7 +223,11 @@ function render(isPageChange = false) {
         for (let i = 3; i < 7; i++) {
         const td = document.createElement("td");
         td.textContent = row[i] || "";
-        td.classList.add("col-normal");
+        if (i==4) {
+            td.classList.add("col-xsmall");
+            } else {
+            td.classList.add("col-normal");
+        }
         tr.appendChild(td);
         }
 
