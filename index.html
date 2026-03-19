@@ -109,7 +109,7 @@ td {
 <img src="TGILogo.png" alt="Logo" style="height: 1.0em; width: auto;">
 </header>-->
 <header style="background-color: rgb(53, 171, 249); display: flex; align-items: center; justify-content: space-between; padding: 10px 20px; color: black;">
-  <h1 style="margin: 0; font-size: 1.0em;">LIVE5 VIRTUAL DASHBOARD</h1>
+  <h1 style="margin: 0; font-size: 1.0em;">LIVE6 VIRTUAL DASHBOARD</h1>
 
   <!-- Contenitore per l'effetto alternanza -->
   <div style="position: relative; height: 1.0em; display: flex; align-items: center; justify-content: flex-end;">
@@ -270,6 +270,9 @@ function render(isPageChange = false) {
 
     // DATI
     pageData.forEach(row => {
+
+    setTimeout(() => {
+        
         const tr = document.createElement("tr");
 
         // flip riga SOLO cambio pagina
@@ -314,7 +317,7 @@ function render(isPageChange = false) {
             td.classList.add("col-normal");
     }
         tr.appendChild(td);
-        }
+        } 
 
         // colonne dinamiche
         //for (let i = 0; i < 3; i++) {
@@ -348,7 +351,7 @@ function render(isPageChange = false) {
             setTimeout(() => {
                 td.textContent = value;
                 td.classList.add("flip-col");
-            }, i * 500); // 🔥 delay progressivo
+            }, i * 200); // 🔥 delay progressivo
             } else {
             // primo render senza delay
             td.textContent = value;
@@ -365,6 +368,7 @@ function render(isPageChange = false) {
         tr.appendChild(tdLast);
 
         tbody.appendChild(tr);
+        }, rowIndex * 120); // 🔥 delay tra righe
     });
 
     lastExtraIndex = extraIndex;
