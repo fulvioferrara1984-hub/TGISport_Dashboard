@@ -69,7 +69,13 @@ let extraIndex = 0;
 function loadData() {
     console.log("Carico CSV...");
 
-    Papa.parse("eventi.csv", {
+fetch("eventi.csv")
+  .then(res => res.text())
+  .then(text => {
+      console.log("CONTENUTO FILE:", text);
+  });
+    
+    Papa.parse("./eventi.csv", {
         download: true,
         skipEmptyLines: true,
         complete: function(results) {
