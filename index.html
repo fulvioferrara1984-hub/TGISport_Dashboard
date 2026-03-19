@@ -102,7 +102,7 @@ td {
 <body>
 
 <header style="background-color: rgb(53, 171, 249); display: flex; align-items: center; justify-content: space-between;padding: 10px 20px; color: black;">
-<h1 style="margin: 0; font-size: 1.0em;">LIVE7 VIRTUAL DASHBOARD</h1>
+<h1 style="margin: 0; font-size: 1.0em;">LIVE8 VIRTUAL DASHBOARD</h1>
   <!-- Il logo a destra -->
 <img src="TGILogo.png" alt="Logo" style="height: 1.0em; width: auto;">
 </header>
@@ -163,7 +163,11 @@ function render(isPageChange = false) {
     for (let i = 0; i < 3; i++) {
     const th = document.createElement("th");
     th.textContent = headers[i] || "";
-    th.classList.add("col-small");
+     if (i==1) {
+        th.classList.add("col-xsmall");
+        } else {
+        th.classList.add("col-small");
+    }
     headerRow.appendChild(th);
     }
 
@@ -220,7 +224,11 @@ function render(isPageChange = false) {
         for (let i = 0; i < 3; i++) {
         const td = document.createElement("td");
         td.textContent = row[i] || "";
-        td.classList.add("col-small");
+        if (i==1) {
+            td.classList.add("col-xsmall");
+            } else {
+            td.classList.add("col-small");
+        }
         tr.appendChild(td);
         }
 
