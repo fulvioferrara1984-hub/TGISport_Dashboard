@@ -183,8 +183,8 @@ const ROWS_PER_PAGE = 10;
 // Aggiorna l'ora ogni secondo (per precisione quando visibile)
     setInterval(updateDateTime, 1000);
 
-    // Alterna ogni 6 secondi
-    setInterval(toggleHeaderElement, 6000);
+    // Alterna ogni 10 secondi
+    setInterval(toggleHeaderElement, 10000);
 
     // Esegui subito l'aggiornamento dell'ora
     updateDateTime();
@@ -416,11 +416,11 @@ function render(isPageChange = false) {
     lastExtraIndex = extraIndex;
 }
 
-// 🔄 colonne ogni 20 sec
+// 🔄 colonne ogni 10 sec
 setInterval(() => {
     extraIndex = (extraIndex + 3) % 9;
     render(false);
-}, 20000);
+}, 10000);
 
 // 📄 pagina ogni 60 sec
 setInterval(() => {
