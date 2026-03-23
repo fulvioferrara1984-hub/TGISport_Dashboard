@@ -7,6 +7,7 @@ DATE,TIME,SPORT,COMPETITION,ROUND,TEAM A,TEAM B,LOCATION,VIDEO FORMAT,OPERATOR,T
 31/03/26,01:00,Football,Friendly,H2H,USA,POR,MCR2,1080i60,M.Molinari,PGMOnly,1,F.Gennaro, TBC , TBC ,F.Ferrara,Confirmed,Uefa.png
 31/03/26,20:45,Football,Dentsu friendly,H2H,ENG,JPN,MCR2,1080p50,M.Molinari,PGMOnly,1,A.Altafini, Fiber - Eurovision, Fiber - Eurovision,F.Ferrara,Confirmed,Uefa.png
 31/03/26,20:45,Football,WCQ - Europe,F,TBC,ALB,MCR2,1080i50,TBC,PGMOnly,1,A.Altafini, Fiber - Eurovision, SAT - EIT ,F.Ferrara,Pending,Uefa.png
+31/03/26,21:00,Football,Friendly,H2H,ESP,EGY,MCR2,1080i50,M.Molinari,PGMOnly,1,F.Gennaro, TBC , TBC ,F.Ferrara,Confirmed,Uefa.png
 04/04/26,15:00,Football,Serie A,31,LEC,ATA,MCR1,1080p50,D.Colombo,PGMOnly,7,S.Pedatella, Fiber - Eurovision, Fiber - Eurovision,S.Pedatella,Confirmed,SerieA_V2.png
 04/04/26,15:00,Football,Serie A,31,SAS,CAG,MCR1,1080p50,A.Aleotti,PGMOnly,7,S.Pedatella, Fiber - Eurovision, Fiber - Eurovision,S.Pedatella,Confirmed,SerieA_V2.png
 04/04/26,18:00,Football,Serie A,31,VER,FIO,MCR1,1080p50,E.Colognese,PGMOnly,7,A.Altafini, Fiber - Eurovision, Fiber - Eurovision,S.Pedatella,Confirmed,SerieA_V2.png
@@ -38,4 +39,3 @@ DATE,TIME,SPORT,COMPETITION,ROUND,TEAM A,TEAM B,LOCATION,VIDEO FORMAT,OPERATOR,T
 12/04/26,TBD,Football,Serie A,32,CAG,CRE,MCR1,1080p50,TBD,PGMOnly,7,S.Pedatella, Fiber - Eurovision, Fiber - Eurovision,S.Pedatella,Confirmed,SerieA_V2.png
 12/04/26,TBD,Football,Serie A,32,COM,INT,MCR1,1080p50,TBD,PGMOnly,7,S.Pedatella, Fiber - Eurovision, Fiber - Eurovision,S.Pedatella,Confirmed,SerieA_V2.png
 12/04/26,TBD,Football,Serie A,32,FIO,LAZ,MCR1,1080p50,TBD,PGMOnly,7,S.Pedatella, Fiber - Eurovision, Fiber - Eurovision,S.Pedatella,Confirmed,SerieA_V2.png
-12/04/26,TBD,Football,Serie A,32,GEN,SAS,MCR1,1080p50,TBD,PGMOnly,7,F.Gennaro, Fiber - Eurovision, Fiber - Eurovision,S.Pedatella,Confirmed,SerieA_V2.png
