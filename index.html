@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<title>Tabellone Eventi</title>
+
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
+<!-- FONT -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --bg: #050505;
+    --cell: #1a1a1a;
+    --text: #f0f0f0;
+    --accent: #ff9d00;
+}
+
+body {
+    margin:0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Montserrat', sans-serif;
+    width:100vw;
+    height:100vh;
+}
+
+header {
+    text-align:left;
+    font-size:3vw;
+    padding:1vh;
+    color:rgb(0, 0, 0);
+}
+
+table {
+    width:100%;
+    /* height:90vh; */
+    height:90%;
+    border-collapse:separate;
+    border-spacing:6px;
+    table-layout:fixed;
+}
+
+th {
+    font-size:1.0vw;
+    color:rgb(53, 171, 249);
+    height: 10px;
+}
+
+td, th {
+    background:var(--cell);
+    padding:5px;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+    text-align:center;
+    border-radius:6px;
+}
+
+td {
+    font-size:1.1vw; /* 🔥 richiesto */
+    height: 20px;
+    /*transition: font-family 0.2s ease;*/
+}
+
+/* larghezze specifiche */
+.col-small { width:6%; }
+.col-medium { width:7%; }
+.col-status { width:8%; }
+.col-logo { width:4%; }
+.col-xsmall { width:5%; }
+.col-mediumlarge { width:8%; }
+.col-normal { width:auto; }
+
+/* colori stato */
+.confirmed { color: #00ff88; }
+.cancelled { color: #ff3b3b; }
+.pending { color: #ffd000; }
+
+/* flip colonne */
+.flip-col {
+    animation: flip 0.6s ease;
+    backface-visibility: hidden;
+}
+
+.rolling-active {
+    font-family: 'Courier New', monospace;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 2px;
+}
+    
+/* flip riga */
+.flip-row {
+    animation: flip 0.8s ease;
+}
+
+@keyframes flip {
+    0% { transform: rotateX(90deg); opacity:0; }
+    100% { transform: rotateX(0); opacity:1; }
+}
+
+.logo-img {
+    max-height: 16px;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.status-cell {
+    font-size: 0.95vw;
+    padding-left: 4px;
+    padding-right: 4px;
+}
+    
+</style>
+</head>
+
+<body>
+
+<!-- <header style="background-color: rgb(53, 171, 249); display: flex; align-items: center; justify-content: space-between;padding: 10px 20px; color: black;">
+<h1 style="margin: 0; font-size: 1.0em;">LIVE3 VIRTUAL DASHBOARD</h1>
+  <!-- Il logo a destra
+<img src="TGILogo.png" alt="Logo" style="height: 1.0em; width: auto;">
+</header>-->
+<header style="background-color: rgb(53, 171, 249); display: flex; align-items: center; justify-content: space-between; padding: 10px 20px; color: black;">
+  <h1 style="margin: 0; font-size: 1.0em;">LIVE EVENTS DASHBOARD</h1>
+
+  <!-- Contenitore per l'effetto alternanza -->
+  <div style="position: relative; height: 1.0em; display: flex; align-items: center; justify-content: flex-end;">
+    
+    <!-- Logo -->
+    <img id="headerLogo" src="TGILogo.png" alt="Logo" 
+         style="height: 1.0em; width: auto; transition: opacity 1s ease-in-out; position: absolute; opacity: 1;">
+    
+    <!-- Data e Ora (inizialmente invisibile) -->
+    <span id="headerDateTime" 
+          style="font-size: 0.5em; font-family: 'Courier New', Courier, monospace; font-weight: bold; white-space: nowrap; transition: opacity 1s ease-in-out; position: absolute; opacity: 0;">
+    </span>
+    
+  </div>
+</header>
+
+    
+<table>
+<tbody id="board-body"></tbody>
+</table>
+
+<script>
+let allData = [];
+let headers = [];
+
+let extraIndex = 0;
+let pageIndex = 0;
+
+let lastExtraIndex = 0;
+
+const ROWS_PER_PAGE = 10;
+    
+    //alternanza logo e orario
+    const logo = document.getElementById('headerLogo');
+    const dateTimeDisplay = document.getElementById('headerDateTime');
+    let showingLogo = true;
+
+    function updateDateTime() {
+        const ora = new Date();
+        const giorno = String(ora.getDate()).padStart(2, '0');
+        const mese = String(ora.getMonth() + 1).padStart(2, '0');
+        const anno = ora.getFullYear();
+        const ore = String(ora.getHours()).padStart(2, '0');
+        const minuti = String(ora.getMinutes()).padStart(2, '0');
+        const secondi = String(ora.getSeconds()).padStart(2, '0');
+        dateTimeDisplay.innerText = `${giorno}/${mese}/${anno} - ${ore}:${minuti}:${secondi}`;
+    }
+
+      function toggleHeaderElement() {
+        if (showingLogo) {
+      // Scompare logo, appare data
+      updateDateTime(); // Aggiorna prima di mostrare
+      logo.style.opacity = "0";
+      dateTimeDisplay.style.opacity = "1";
+    } else {
+      // Scompare data, appare logo
+      logo.style.opacity = "1";
+      dateTimeDisplay.style.opacity = "0";
+    }
+    showingLogo = !showingLogo;
+  }
+//fine
+
+// Aggiorna l'ora ogni secondo (per precisione quando visibile)
+    setInterval(updateDateTime, 1000);
+
+    // Alterna ogni 10 secondi
+    setInterval(toggleHeaderElement, 10000);
+
+    // Esegui subito l'aggiornamento dell'ora
+    updateDateTime();
+//fine
+
+    function loadData() {
+    Papa.parse("./eventi.csv", {
+        download: true,
+        skipEmptyLines: true,
+        complete: function(results) {
+            headers = results.data[0];
+            allData = results.data.slice(1);
+            render(true); // full refresh
+        }
+    });
+}
+
+function getStatusClass(value) {
+    if (!value) return "";
+    value = value.toUpperCase();
+
+    if (value.includes("CONFIRMED")) return "confirmed";
+    if (value.includes("CANCELLED")) return "cancelled";
+    if (value.includes("PENDING")) return "pending";
+    return "";
+}
+
+function rollingText(element, finalText) {
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    let iterations = 0;
+
+    //element.classList.add("rolling-active"); // 🔥 attiva font speciale
+
+    const interval = setInterval(() => {
+        element.textContent = finalText
+            .split("")
+            .map((char, index) => {
+                if (index < iterations) {
+                    return finalText[index];
+                }
+                return chars[Math.floor(Math.random() * chars.length)];
+            })
+            .join("");
+
+        iterations += 0.5;
+
+        if (iterations >= finalText.length) {
+            clearInterval(interval);
+            element.textContent = finalText;
+
+            // 🔥 torna al font normale
+            element.classList.remove("rolling-active");
+        }
+    }, 30);
+}
+    
+function render(isPageChange = false) {
+    const tbody = document.getElementById("board-body");
+    tbody.innerHTML = "";
+
+    const start = pageIndex * ROWS_PER_PAGE;
+    const pageData = allData.slice(start, start + ROWS_PER_PAGE);
+
+    // HEADER
+    const headerRow = document.createElement("tr");
+
+    const thLogo = document.createElement("th");
+    thLogo.textContent = "";
+    thLogo.classList.add("col-logo");
+    thLogo.style.backgroundColor = '#050505';
+    headerRow.appendChild(thLogo);
+    
+    // prime 3 colonne strette
+    for (let i = 0; i < 3; i++) {
+    const th = document.createElement("th");
+    th.textContent = headers[i] || "";
+     if (i==1) {
+        th.classList.add("col-xsmall");
+        } else {
+        th.classList.add("col-small");
+    }
+    headerRow.appendChild(th);
+    }
+
+    // colonne 4-6 normali
+    for (let i = 3; i < 7; i++) {
+    const th = document.createElement("th");
+    th.textContent = headers[i] || "";
+    if (i==4) {
+        th.classList.add("col-xsmall");
+        } else if (i==5) {
+        th.classList.add("col-small");
+        } else if (i==6) {
+        th.classList.add("col-small");
+        } else {
+        th.classList.add("col-normal");
+    }
+    headerRow.appendChild(th);
+    }
+
+    // 3 colonne dinamiche
+    for (let i = 0; i < 3; i++) {
+        const th = document.createElement("th");
+        th.textContent = headers[7 + extraIndex + i] || "";
+        //th.style.color = "var(--accent)";
+         if (i==2) {
+        th.classList.add("col-mediumlarge");
+        }
+        headerRow.appendChild(th);
+    }
+
+    // Aggiungi l'ultima colonna fissa (se presente nel tuo codice originale)
+
+    const thLast = document.createElement("th");
+    thLast.textContent = headers[16] || "";
+    thLast.classList.add("col-status");
+    headerRow.appendChild(thLast);
+
+    tbody.appendChild(headerRow);
+
+    // DATI
+    pageData.forEach(row => {
+        
+        const tr = document.createElement("tr");
+
+        // flip riga SOLO cambio pagina
+        if (isPageChange) {
+            tr.classList.add("flip-row");
+        }
+
+        const tdLogo = document.createElement("td");
+        tdLogo.classList.add("col-logo");
+        tdLogo.style.padding = "2px";
+        const img = document.createElement("img");
+        img.src = "Loghi/" + (row[17] || "default.png"); // colonna logo
+        img.classList.add("logo-img");
+
+        tdLogo.appendChild(img);
+        tr.appendChild(tdLogo);
+        
+        // colonne fisse
+        // prime 3 colonne strette
+        for (let i = 0; i < 3; i++) {
+        const td = document.createElement("td");
+        td.textContent = row[i] || "";
+        if (i==1) {
+            td.classList.add("col-xsmall");
+            } else {
+            td.classList.add("col-small");
+        }
+        tr.appendChild(td);
+        }
+
+        // colonne 4-6 normali
+        for (let i = 3; i < 7; i++) {
+        const td = document.createElement("td");
+        td.textContent = row[i] || "";
+        if (i==4) {
+            td.classList.add("col-xsmall");
+        } else if (i==5) {
+            td.classList.add("col-small");
+        } else if (i==6) {
+            td.classList.add("col-small");
+        } else {
+            td.classList.add("col-normal");
+    }
+        tr.appendChild(td);
+        } 
+
+        // colonne dinamiche
+        //for (let i = 0; i < 3; i++) {
+        //     const td = document.createElement("td");
+        //    td.textContent = row[7 + extraIndex + i] || "";
+        //    if (i==2) {
+        //    td.classList.add("col-mediumlarge");
+        //    }
+        //    // flip SOLO se cambiano colonne
+        //    if (extraIndex !== lastExtraIndex) {
+        //        td.classList.add("flip-col");
+        //    }
+        //    tr.appendChild(td);
+        //}
+
+        // nuova versione delle colonne dinamiche con attesa di 500 ms
+        for (let i = 0; i < 3; i++) {
+        const td = document.createElement("td");
+            if (i == 2) {
+                td.classList.add("col-mediumlarge");
+            }
+        tr.appendChild(td);
+
+        const value = row[7 + extraIndex + i] || "";
+
+        if (extraIndex !== lastExtraIndex) {
+            // prima svuoto (opzionale ma consigliato)
+            td.textContent = "";
+            
+            setTimeout(() => {
+                td.classList.add("flip-col");
+                rollingText(td, value); // 🔥 effetto rolling
+            }, i * 500);
+            
+            
+            //setTimeout(() => {
+            //    td.textContent = value;
+            //    td.classList.add("flip-col");
+            //}, i * 200); // 🔥 delay progressivo
+            //} else {
+            //// primo render senza delay
+            //td.textContent = value;
+            //}
+        } else {
+            td.textContent = value;
+        }
+        }
+
+        
+
+        // ultima colonna
+        const tdLast = document.createElement("td");
+        tdLast.textContent = row[16] || "";
+        tdLast.classList.add(getStatusClass(row[16]));
+        tdLast.classList.add("col-status");
+        tdLast.classList.add("status-cell");
+        tr.appendChild(tdLast);
+
+        tbody.appendChild(tr);
+    });
+
+    lastExtraIndex = extraIndex;
+}
+
+// 🔄 colonne ogni 10 sec
+setInterval(() => {
+    extraIndex = (extraIndex + 3) % 9;
+    render(false);
+}, 10000);
+
+// 📄 pagina ogni 60 sec
+setInterval(() => {
+    pageIndex++;
+    if (pageIndex * ROWS_PER_PAGE >= allData.length) {
+        pageIndex = 0;
+    }
+    render(true);
+}, 60000);
+
+// reload CSV
+setInterval(loadData, 60000);
+
+loadData();
+</script>
+
+</body>
+</html>
